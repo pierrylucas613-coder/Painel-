@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Painel Gamer UI</title>
+
+<style>
+body{
+    background:#0a0a0a;
+    font-family:Arial, Helvetica, sans-serif;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    margin:0;
+}
+
+/* Painel */
+.painel{
+    width:420px;
+    background:#111;
+    border:2px solid red;
+    border-radius:10px;
+    padding:20px;
+    box-shadow:0 0 20px red;
+    color:white;
+    transition:0.3s;
+}
+
+/* Modo segundo plano */
+.painel.background-mode{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    width:250px;
+    transform:scale(0.9);
+    opacity:0.9;
+}
+
+/* Minimizado */
+.painel.minimized{
+    height:40px;
+    overflow:hidden;
+}
+
+.titulo{
+    text-align:center;
+    font-size:22px;
+    margin-bottom:15px;
+    color:red;
+    cursor:pointer;
+}
+
+.item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin:10px 0;
+}
+
+button, select, input[type="color"]{
+    background:#1a1a1a;
+    border:1px solid red;
+    color:white;
+    padding:5px;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.toggle{
+    width:40px;
+    height:20px;
+    background:#333;
+    border-radius:20px;
+    position:relative;
+    cursor:pointer;
+}
+
+.toggle::before{
+    content:"";
+    width:16px;
+    height:16px;
+    background:red;
+    border-radius:50%;
+    position:absolute;
+    top:2px;
+    left:2px;
+    transition:0.3s;
+}
+
+.toggle.active{
+    background:red;
+}
+
+.toggle.active::before{
+    left:22px;
+    background:white;
+}
+
+.slider{
+    width:100%;
+}
+
+</style>
+</head>
+<body>
+
+<div class="painel" id="painel">
+    <div class="titulo" onclick="minimizar()">PAINEL GAMER UI</div>
+
+    <div class="item">Abrir em Segundo Plano <div class="toggle" id="bgToggle"></div></div>
+
+    <div class="item">ESP <div class="toggle"></div></div>
+    <div class="item">Aimbot <div class="toggle"></div></div>
+    <div class="item">Aim FOV <input type="range" class="slider" min="0" max="100"></div>
+    <div class="item">Aimlock <div class="toggle"></div></div>
+    <div class="item">Precisão <div class="toggle"></div></div>
+    <div class="item">Estabilidade <div class="toggle"></div></div>
+    <div class="item">Radar 360° <div class="toggle"></div></div>
+    <div class="item">ESP Player <div class="toggle"></div></div>
+    <div class="item">ESP Distância <div class="toggle"></div></div>
+
+    <div class="item">
+        Alvo:
+        <select>
+            <option>Cabeça</option>
+            <option>Peito</option>
+        </select>
+    </div>
+
+    <div class="item">100% Capa <div class="toggle"></div></div>
+
+    <div class="item">
+        Cor Inimigo:
+        <input type="color">
+    </div>
+
+</div>
+
+<script>
+
+// Toggle normal
+document.querySelectorAll(".toggle").forEach(toggle => {
+    toggle.addEventListener("click", () => {
+        toggle.classList.toggle("active");
+    });
+});
+
+// Segundo plano
+const painel = document.getElementById("painel");
+const bgToggle = document.getElementById("bgToggle");
+
+bgToggle.addEventListener("click", () => {
+    painel.classList.toggle("background-mode");
+});
+
+// Minimizar clicando no título
+function minimizar(){
+    painel.classList.toggle("minimized");
+}
+
+</script>
+
+</body>
+</html>
